@@ -99,6 +99,11 @@ Executando o servidor
 fastapi dev fastapi_zero
 ```
 
+Criando o `.gitignore`  
+```sh
+pipx run ignr -p python > .gitignore
+```
+
 ### Ruff
 
 [Ruff](https://docs.astral.sh/ruff/)
