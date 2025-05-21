@@ -1,5 +1,5 @@
 # FastAPI-do-Zero-2025
-This is study purpose project following the FastAPI do Zero material from @dunossauro @livedepython
+Este é um repositório de estudos para o curso do material FastAPI do Zero do autor @dunossauro @livedepython
 
 ## Ferramentas
 
