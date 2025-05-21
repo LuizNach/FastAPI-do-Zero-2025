@@ -1,5 +1,8 @@
 # FastAPI-do-Zero-2025
 Este é um repositório de estudos para o curso do material FastAPI do Zero do autor @dunossauro @livedepython
+Referências: 
+* [fastapidozero.dunossauro.com](https://fastapidozero.dunossauro.com/4.0/)
+* [dunossauro/fastapi-do-zero](https://github.com/dunossauro/fastapi-do-zero?tab=readme-ov-file)
 
 ## Ferramentas
 
