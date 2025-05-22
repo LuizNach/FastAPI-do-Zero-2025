@@ -24,3 +24,14 @@ def test_root_must_return_hello_world_message() -> None:
     # Assert
     assert response.status_code == HTTPStatus.OK
     assert response.json() == {'message': 'Olá mundo!'}
+
+
+def test_html_page_must_return_ola_mundo_page() -> None:
+
+    client: TestClient = TestClient(app=app)
+
+    response = client.get('/html_page')
+
+    assert response.status_code == HTTPStatus.OK
+    assert "Olá Mundo" in response.content.decode()
+    assert "<title>Hello</title>" in response.content.decode()
