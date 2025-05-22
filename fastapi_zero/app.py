@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
 from fastapi_zero.schemas import Message
 
@@ -36,3 +37,17 @@ def default_api() -> Message:
 
     # return {'message': "hello"}
     # Pydantic aceita. Mypy nao aceita. Pylance nao aceita.
+
+
+@app.get('/html_page', response_class=HTMLResponse)
+def html_page() -> str:
+    return """
+    <html>
+    <head>
+        <title>Hello</title>
+    </head>
+    <body>
+        <h1>Olá Mundo!</h1>
+    </body>
+    </html>
+    """
