@@ -31,7 +31,8 @@ def default_api() -> Message:
     # return 123
     # Incorreto. Uma vez estabelecido o tipo de retorno é
     # uma quebra de contrato.
-    # Pydantic apresenta erro em tempo de execução.
+    # Pydantic apresenta erro em tempo de execução mas não
+    # bloqueia as api's do fastapi.
     # Mypy nao aceita.
     # Pylance nao aceita.
 
