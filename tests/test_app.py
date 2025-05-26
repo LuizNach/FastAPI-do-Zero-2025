@@ -1,11 +1,10 @@
 from http import HTTPStatus
 
 from fastapi.testclient import TestClient
+from httpx import Response
 
-from fastapi_zero.app import app
 
-
-def test_root_must_return_hello_world_message() -> None:
+def test_root_must_return_hello_world_message(client: TestClient) -> None:
     """
     Esse teste tem 3 estapas (AAA):
     - A: Arrange - Arranjo
@@ -16,19 +15,17 @@ def test_root_must_return_hello_world_message() -> None:
     Setup, Exercise, Assert, Teardown
     """
     # Arrange
-    client: TestClient = TestClient(app=app)
+    # client: TestClient = TestClient(app=app)
 
     # Act
-    response = client.get('/')
+    response: Response = client.get('/')
 
     # Assert
     assert response.status_code == HTTPStatus.OK
     assert response.json() == {'message': 'Olá mundo!'}
 
 
-def test_html_page_must_return_ola_mundo_page() -> None:
-    client: TestClient = TestClient(app=app)
-
+def test_html_page_must_return_ola_mundo_page(client: TestClient) -> None:
     response = client.get('/html_page')
 
     assert response.status_code == HTTPStatus.OK
