@@ -3,7 +3,7 @@ from http import HTTPStatus
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
-from fastapi_zero.schemas import UserDB, UserPublic, UserSchema
+from fastapi_zero.schemas import UserDB, UserList, UserPublic, UserSchema
 
 app = FastAPI(title="My Api's using FastAPI")
 database: list[UserDB] = []
@@ -62,3 +62,8 @@ def create_user(user: UserSchema):
     database.append(user_with_id)
 
     return user_with_id
+
+
+@app.get('/read_all_users', status_code=HTTPStatus.OK, response_model=UserList)
+def read_users():
+    return {"users": database}
