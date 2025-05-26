@@ -3,9 +3,10 @@ from http import HTTPStatus
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
-from fastapi_zero.schemas import Message, UserPublic, UserSchema
+from fastapi_zero.schemas import UserDB, UserPublic, UserSchema
 
 app = FastAPI(title="My Api's using FastAPI")
+database: list[UserDB] = []
 
 
 @app.get('/', status_code=HTTPStatus.OK)
@@ -55,9 +56,9 @@ def html_page() -> str:
 
 
 @app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPublic)
-def create_user(user: UserSchema) -> UserSchema:
-    # O Pyddantic faz o filtro/validação dos dados da entrada
-    # tanto quanto na saida
-    # O response_model detalha qual é o schema que vai ser utilizado para
-    # filtrar ou transformar a saída declarada no type hints.
-    return user
+def create_user(user: UserSchema):
+    user_with_id: UserDB = UserDB(**user.model_dump(), id=len(database) + 1)
+
+    database.append(user_with_id)
+
+    return user_with_id
