@@ -52,3 +52,29 @@ def test_user_can_be_created(client: TestClient) -> None:
 
     key = 'id'
     assert key in response_body
+
+
+def test_read_users(client: TestClient) -> None:
+
+    user_input: dict[str, str] = {
+        'username': 'Cebolinha',
+        'password': 'monica',
+        'email': 'email+alias@email.org.br',
+    }
+
+    response: Response = client.post(url='/users', json=user_input)
+    assert response.status_code == HTTPStatus.CREATED
+    response = client.get(url='/read_all_users')
+    assert response.status_code == HTTPStatus.OK
+
+    response_body = response.json()
+    public_user = response_body["users"][-1]  # last user created in memory
+
+    assert public_user['username'] == user_input['username']
+    assert public_user['email'] == user_input['email']
+
+    key: str = 'password'
+    assert key not in public_user
+
+    key = 'id'
+    assert key in public_user
