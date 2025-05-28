@@ -66,4 +66,4 @@ def create_user(user: UserSchema):
 
 @app.get('/read_all_users', status_code=HTTPStatus.OK, response_model=UserList)
 def read_users():
-    return {"users": database}
+    return {'users': database}
