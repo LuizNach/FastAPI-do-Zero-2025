@@ -88,7 +88,6 @@ def update_user(user_id: int, user: UserSchema) -> UserSchema:
     '/users/{user_id}', status_code=HTTPStatus.OK, response_model=UserPublic
 )
 def delete_user(user_id: int) -> UserDB:
-
     if user_id < 1 or user_id > len(database):
         raise HTTPException(
             detail='User not found!', status_code=HTTPStatus.NOT_FOUND

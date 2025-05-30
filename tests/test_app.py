@@ -102,18 +102,19 @@ def test_update_user(client: TestClient) -> None:
 
 
 def test_update_invalid_user(client: TestClient) -> None:
-
-    response = client.put(url=f'/users/{-1}', json={
-        'username': 'Cenorinha',
-        'password': 'cascao',
-        'email': 'email+alias@email.org.br',
-    })
+    response = client.put(
+        url=f'/users/{-1}',
+        json={
+            'username': 'Cenorinha',
+            'password': 'cascao',
+            'email': 'email+alias@email.org.br',
+        },
+    )
 
     assert response.status_code == HTTPStatus.NOT_FOUND
 
 
 def test_delete_valid_user(client: TestClient) -> None:
-
     user_input: dict[str, str] = {
         'username': 'Saruman',
         'password': 'cademeupalantir',
