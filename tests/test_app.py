@@ -110,3 +110,25 @@ def test_update_invalid_user(client: TestClient) -> None:
     })
 
     assert response.status_code == HTTPStatus.NOT_FOUND
+
+
+def test_delete_valid_user(client: TestClient) -> None:
+
+    user_input: dict[str, str] = {
+        'username': 'Saruman',
+        'password': 'cademeupalantir',
+        'email': 'email+alias@email.org.br',
+    }
+
+    response: Response = client.post(url='/users', json=user_input)
+    assert response.status_code == HTTPStatus.CREATED
+
+    id_user_created = response.json()['id']
+
+    response = client.delete(url=f'/users/{id_user_created}')
+    assert response.status_code == HTTPStatus.OK
+
+
+def test_delete_invalid_user(client: TestClient) -> None:
+    response = client.delete(url=f'/users/{0}')
+    assert response.status_code == HTTPStatus.NOT_FOUND
