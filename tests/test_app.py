@@ -77,3 +77,36 @@ def test_read_users(client: TestClient) -> None:
 
     key = 'id'
     assert key in public_user
+
+
+def test_update_user(client: TestClient) -> None:
+    user_input: dict[str, str] = {
+        'username': 'Cebolinha',
+        'password': 'monica',
+        'email': 'email+alias@email.org.br',
+    }
+
+    response: Response = client.post(url='/users', json=user_input)
+    assert response.status_code == HTTPStatus.CREATED
+
+    id_user_created = response.json()['id']
+
+    updated_user: dict[str, str] = {
+        'username': 'Cenorinha',
+        'password': 'cascao',
+        'email': 'email+alias@email.org.br',
+    }
+
+    response = client.put(url=f'/users/{id_user_created}', json=updated_user)
+    assert response.status_code == HTTPStatus.OK
+
+
+def test_update_invalid_user(client: TestClient) -> None:
+
+    response = client.put(url=f'/users/{-1}', json={
+        'username': 'Cenorinha',
+        'password': 'cascao',
+        'email': 'email+alias@email.org.br',
+    })
+
+    assert response.status_code == HTTPStatus.NOT_FOUND
